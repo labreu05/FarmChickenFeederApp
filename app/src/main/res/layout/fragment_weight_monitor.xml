@@ -11,262 +11,292 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#cccccc"
+        android:background="#f2f2f2"
         android:padding="8dp">
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
             android:layout_marginBottom="10dp"
             android:background="#ffffff"
             android:padding="20dp"
             android:layout_gravity="center">
-
-            <TextView
-                android:id="@+id/main_title"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="Arial"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="Main Container"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/main_title"
-                android:layout_centerHorizontal="true"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="115dp"
-                    android:layout_height="115dp"
-                    android:layout_alignParentTop="true"
-                    android:baselineAlignBottom="true"
-                    android:contentDescription="Image content"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/pie_1" />
+                android:layout_marginBottom="10dp"
+                android:background="#ffffff"
+                android:padding="20dp"
+                android:layout_gravity="center">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/main_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:paddingRight="5dp"
-                    android:text="Weight:"
-                    android:textSize="17sp"
+                    android:fontFamily="Arial"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:text="Main Container"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="18.3 Pounds"
-                    android:textSize="17sp" />
+                    android:layout_below="@+id/main_title"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical">
 
-            </LinearLayout>
-        </RelativeLayout>
+                    <ImageView
+                        android:layout_width="115dp"
+                        android:layout_height="115dp"
+                        android:layout_alignParentTop="true"
+                        android:baselineAlignBottom="true"
+                        android:contentDescription="Image content"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/pie_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="5dp"
+                        android:text="Weight:"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18.3 Pounds"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:elevation="10dp"
+                android:padding="10dp"
+                android:layout_marginRight="5dp"
                 android:background="#ffffff"
                 android:textAlignment="center"
                 android:layout_weight="1">
-
-                <TextView
-                    android:layout_gravity="center"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="Arial"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="Plate #1"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#ffffff"
                     android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_width="115dp"
-                    android:layout_height="115dp"
-                    android:layout_alignParentTop="true"
-                    android:baselineAlignBottom="true"
-                    android:contentDescription="Image content"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/pie_1" />
-
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                    android:layout_weight="1">
 
                     <TextView
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="Arial"
+                        android:paddingBottom="10dp"
+                        android:text="Plate #1"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="115dp"
+                        android:layout_height="115dp"
+                        android:layout_alignParentTop="true"
+                        android:baselineAlignBottom="true"
+                        android:contentDescription="Image content"
                         android:paddingRight="10dp"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Active"/>
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                        android:src="@drawable/pie_1" />
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Last Fill"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="17sp"
-                        android:text="09/05/2018"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                        android:paddingBottom="5dp">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:text="Active"/>
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Weight"/>
+                        android:paddingBottom="5dp">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:text="Last Fill"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:text="09/05/2018"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:text="Weight"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:text="5.7 Pounds"/>
+                    </LinearLayout>
+                    <Button
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
                         android:textSize="17sp"
-                        android:text="5.7 Pounds"/>
+                        android:padding="5dp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:text="Refill"
+                        android:textAllCaps="true"/>
                 </LinearLayout>
-                <Button
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:text="Refill"
-                    android:textAllCaps="true"/>
-            </LinearLayout>
-            <LinearLayout
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_marginLeft="5dp"
+                android:background="#ffffff"
                 android:textAlignment="center"
                 android:layout_weight="1">
-
-                <TextView
-                    android:layout_gravity="center"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="Arial"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="Plate #1"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="#ffffff"
                     android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_width="115dp"
-                    android:layout_height="115dp"
-                    android:layout_alignParentTop="true"
-                    android:baselineAlignBottom="true"
-                    android:contentDescription="Image content"
-                    android:paddingRight="10dp"
-                    android:src="@drawable/pie_1" />
-
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                    android:layout_weight="1">
 
                     <TextView
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="Arial"
+                        android:paddingBottom="10dp"
+                        android:text="Plate #1"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="115dp"
+                        android:layout_height="115dp"
+                        android:layout_alignParentTop="true"
+                        android:baselineAlignBottom="true"
+                        android:contentDescription="Image content"
                         android:paddingRight="10dp"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Active"/>
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                        android:src="@drawable/pie_1" />
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Last Fill"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="17sp"
-                        android:text="09/05/2018"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp">
+                        android:paddingBottom="5dp">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:text="Active"/>
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:text="Weight"/>
+                        android:paddingBottom="5dp">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:text="Last Fill"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:text="09/05/2018"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:text="Weight"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:text="5.7 Pounds"/>
+                    </LinearLayout>
+                    <Button
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
                         android:textSize="17sp"
-                        android:text="5.7 Pounds"/>
+                        android:padding="5dp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:text="Refill"
+                        android:textAllCaps="true"/>
                 </LinearLayout>
-                <Button
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:text="Refill"
-                    android:textAllCaps="true"/>
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
 
     </android.support.v7.widget.LinearLayoutCompat>

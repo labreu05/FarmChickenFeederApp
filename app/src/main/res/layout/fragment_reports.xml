@@ -10,81 +10,83 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#f2f2f2"
+        android:padding="10dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
-                    android:paddingBottom="10dp"
-                    android:fontFamily="Arial"
-                    android:textColor="#111111"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:text="Date Selection"
-                    android:layout_gravity="center"/>
-
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="10dp"
                         android:fontFamily="Arial"
                         android:textColor="#111111"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:text="Start Date"/>
+                        android:text="Date Selection"
+                        android:layout_gravity="center"/>
 
-                    <EditText
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20/05/2018 05:00 PM"/>
+                        android:layout_gravity="center">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:fontFamily="Arial"
+                            android:textColor="#111111"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:text="Start Date"/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20/05/2018 05:00 PM"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="15dp"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="10dp"
+                            android:fontFamily="Arial"
+                            android:textColor="#111111"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:text="End Date"/>
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20/05/2018 05:00 PM"/>
+
+                    </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="15dp"
-                    android:layout_gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="10dp"
-                        android:fontFamily="Arial"
-                        android:textColor="#111111"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:text="End Date"/>
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="20/05/2018 05:00 PM"/>
-
-                </LinearLayout>
             </LinearLayout>
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,54 +95,62 @@
             android:paddingTop="20dp"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="25dp">
-
-                <TextView
+                android:layout_marginRight="25dp">
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="Arial"
-                    android:textColor="#111111"
-                    android:background="@color/colorPrimary"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:text="Pounds"
-                    android:padding="10dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#111111"
-                    android:background="#cccccc"
-                    android:textSize="18sp"
-                    android:text="500.0"
-                    android:padding="10dp"/>
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
-            <LinearLayout
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="Arial"
+                        android:textColor="#111111"
+                        android:background="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="Pounds"
+                        android:padding="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#111111"
+                        android:background="#cccccc"
+                        android:textSize="18sp"
+                        android:text="500.0"
+                        android:padding="10dp"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="Arial"
-                    android:textColor="#111111"
-                    android:background="@color/colorPrimary"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:text="Refills"
-                    android:padding="10dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#111111"
-                    android:background="#cccccc"
-                    android:textSize="18sp"
-                    android:text="300"
-                    android:padding="10dp"/>
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="Arial"
+                        android:textColor="#111111"
+                        android:background="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="Refills"
+                        android:padding="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#111111"
+                        android:background="#cccccc"
+                        android:textSize="18sp"
+                        android:text="300"
+                        android:padding="10dp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
         <TableLayout
             android:layout_width="match_parent"
@@ -160,7 +170,8 @@
 
                 <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff">
 
                     <TableRow android:layout_width="match_parent">
                         <TextView android:text="1" android:layout_weight="1"/>
@@ -419,5 +430,4 @@
             </ScrollView>
         </TableLayout>
     </LinearLayout>
-
 </FrameLayout>
