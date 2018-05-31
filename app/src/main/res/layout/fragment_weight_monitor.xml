@@ -142,6 +142,7 @@
                             android:textStyle="bold"
                             android:text="Active"/>
                         <Switch
+                            android:id="@+id/plate_1_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -159,6 +160,7 @@
                             android:textStyle="bold"
                             android:text="Last Fill"/>
                         <TextView
+                            android:id="@+id/plate_1_last_fill"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="17sp"
@@ -179,10 +181,18 @@
                             android:text="Weight"/>
 
                         <TextView
+                            android:id="@+id/plate_1_pounds"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="17sp"
-                            android:text="5.7 Pounds"/>
+                            android:text="5.7"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:text="Pounds"/>
                     </LinearLayout>
                     <Button
                         android:layout_gravity="center"
@@ -202,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:background="#ffffff"
                 android:textAlignment="center"
                 android:layout_weight="1">
@@ -211,6 +221,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="10dp"
+                    android:layout_marginRight="5dp"
                     android:background="#ffffff"
                     android:textAlignment="center"
                     android:layout_weight="1">
@@ -250,6 +261,7 @@
                             android:textStyle="bold"
                             android:text="Active"/>
                         <Switch
+                            android:id="@+id/plate_2_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                     </LinearLayout>
@@ -267,6 +279,7 @@
                             android:textStyle="bold"
                             android:text="Last Fill"/>
                         <TextView
+                            android:id="@+id/plate_2_last_fill"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="17sp"
@@ -287,10 +300,18 @@
                             android:text="Weight"/>
 
                         <TextView
+                            android:id="@+id/plate_2_pounds"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="17sp"
-                            android:text="5.7 Pounds"/>
+                            android:text="5.7"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:text="Pounds"/>
                     </LinearLayout>
                     <Button
                         android:layout_gravity="center"
