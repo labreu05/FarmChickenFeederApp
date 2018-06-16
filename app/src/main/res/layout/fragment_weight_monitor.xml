@@ -51,7 +51,8 @@
 
                     <RelativeLayout
                         android:layout_width="115dp"
-                        android:layout_height="115dp">
+                        android:layout_height="115dp"
+                        android:layout_gravity="center">
 
                         <com.hookedonplay.decoviewlib.DecoView
                             xmlns:custom="http://schemas.android.com/apk/res-auto"
@@ -64,7 +65,7 @@
                             android:layout_marginRight="10dp"/>
 
                         <TextView
-                            android:id="@+id/main_container_percentaje"
+                            android:id="@+id/main_container_percentage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
@@ -136,15 +137,32 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_gravity="center"
+                    <RelativeLayout
                         android:layout_width="115dp"
                         android:layout_height="115dp"
-                        android:layout_alignParentTop="true"
-                        android:baselineAlignBottom="true"
-                        android:contentDescription="Image content"
-                        android:paddingRight="10dp"
-                        android:src="@drawable/pie_1" />
+                        android:layout_gravity="center">
+
+                        <com.hookedonplay.decoviewlib.DecoView
+                            xmlns:custom="http://schemas.android.com/apk/res-auto"
+                            custom:dv_lineWidth="26dp"
+                            android:id="@+id/plate_1_chart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:baselineAlignBottom="true"
+                            android:layout_marginRight="10dp"/>
+
+                        <TextView
+                            android:id="@+id/plate_1_percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:text="100%"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_gravity="center"
@@ -255,15 +273,32 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_gravity="center"
+                    <RelativeLayout
                         android:layout_width="115dp"
                         android:layout_height="115dp"
-                        android:layout_alignParentTop="true"
-                        android:baselineAlignBottom="true"
-                        android:contentDescription="Image content"
-                        android:paddingRight="10dp"
-                        android:src="@drawable/pie_1" />
+                        android:layout_gravity="center">
+
+                        <com.hookedonplay.decoviewlib.DecoView
+                            xmlns:custom="http://schemas.android.com/apk/res-auto"
+                            custom:dv_lineWidth="26dp"
+                            android:id="@+id/plate_2_chart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:baselineAlignBottom="true"
+                            android:layout_marginRight="10dp"/>
+
+                        <TextView
+                            android:id="@+id/plate_2_percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:text="100%"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_gravity="center"

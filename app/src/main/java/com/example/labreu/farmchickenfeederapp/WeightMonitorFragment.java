@@ -46,18 +46,22 @@ public class WeightMonitorFragment extends Fragment {
         // Get views
         final View mainView = inflater.inflate(R.layout.fragment_weight_monitor, container, false);
         final TextView mainContainerPounds = (TextView) mainView.findViewById(R.id.pounds);
-        final TextView mainContainerPercentaje = (TextView) mainView.findViewById(R.id.main_container_percentaje);
+        final TextView mainContainerPercentage = (TextView) mainView.findViewById(R.id.main_container_percentage);
         // Plate 1
         final TextView plate1Pounds = (TextView) mainView.findViewById(R.id.plate_1_pounds);
         final TextView plate1LastFill = (TextView) mainView.findViewById(R.id.plate_1_last_fill);
         final Switch plate1Status = (Switch) mainView.findViewById(R.id.plate_1_status);
+        final TextView plate1Percentage = (TextView) mainView.findViewById(R.id.plate_1_percentage);
         // Plate 2
         final TextView plate2Pounds = (TextView) mainView.findViewById(R.id.plate_2_pounds);
         final TextView plate2LastFill = (TextView) mainView.findViewById(R.id.plate_2_last_fill);
         final Switch plate2Status = (Switch) mainView.findViewById(R.id.plate_2_status);
+        final TextView plate2Percentage = (TextView) mainView.findViewById(R.id.plate_2_percentage);
 
-        //Set Spinners
+        //Get Spinners
         final DecoView mainContainerChart = (DecoView) mainView.findViewById(R.id.main_container_chart);
+        final DecoView plate1Chart = (DecoView) mainView.findViewById(R.id.plate_1_chart);
+        final DecoView plate2Chart = (DecoView) mainView.findViewById(R.id.plate_2_chart);
 
 // Create background track
         // Set Value event listeners
@@ -67,7 +71,7 @@ public class WeightMonitorFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String text = dataSnapshot.getValue(String.class);
 
-                mainContainerPounds.setText(text);
+                updatePounds(text, mainContainerPounds, mainContainerPercentage, mainContainerChart);
             }
 
             @Override
@@ -81,7 +85,7 @@ public class WeightMonitorFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String text = dataSnapshot.getValue(String.class);
 
-                updatePounds(text, plate1Pounds, mainContainerPercentaje, mainContainerChart);
+                updatePounds(text, plate1Pounds, plate1Percentage, plate1Chart);
 
             }
 
@@ -122,7 +126,7 @@ public class WeightMonitorFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String text = dataSnapshot.getValue(String.class);
 
-                plate2Pounds.setText(text);
+                updatePounds(text, plate2Pounds, plate2Percentage, plate2Chart);
             }
 
             @Override
@@ -177,6 +181,7 @@ public class WeightMonitorFragment extends Fragment {
 
     public void updatePounds(String value, TextView poundsView, TextView percentageView, DecoView containerChart) {
         poundsView.setText(value);
+        percentageView.setText(value + "%");
 
         containerChart.deleteAll();
         containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#004ac1"))
