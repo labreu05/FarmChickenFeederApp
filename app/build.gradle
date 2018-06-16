@@ -18,6 +18,10 @@ android {
     }
 }
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -30,6 +34,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.github.bmarrdev:android-DecoView-charting:v1.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -46,16 +46,34 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/main_title"
                     android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <ImageView
+                    <RelativeLayout
                         android:layout_width="115dp"
-                        android:layout_height="115dp"
-                        android:layout_alignParentTop="true"
-                        android:baselineAlignBottom="true"
-                        android:contentDescription="Image content"
-                        android:paddingRight="10dp"
-                        android:src="@drawable/pie_1" />
+                        android:layout_height="115dp">
+
+                        <com.hookedonplay.decoviewlib.DecoView
+                            xmlns:custom="http://schemas.android.com/apk/res-auto"
+                            custom:dv_lineWidth="26dp"
+                            android:id="@+id/main_container_chart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:baselineAlignBottom="true"
+                            android:layout_marginRight="10dp"/>
+
+                        <TextView
+                            android:id="@+id/main_container_percentaje"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:text="100%"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -212,7 +230,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
                 android:background="#ffffff"
                 android:textAlignment="center"
                 android:layout_weight="1">

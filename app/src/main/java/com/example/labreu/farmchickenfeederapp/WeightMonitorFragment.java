@@ -1,9 +1,9 @@
 package com.example.labreu.farmchickenfeederapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +16,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
 
-import org.w3c.dom.Text;
+import static java.lang.Integer.parseInt;
 
 public class WeightMonitorFragment extends Fragment {
     @Override
@@ -37,10 +39,14 @@ public class WeightMonitorFragment extends Fragment {
         DatabaseReference plate2PoundsRef = plate2Ref.child("pounds");
         final DatabaseReference plate2StatusRef = plate2Ref.child("isActive");
         DatabaseReference plate2LastFillRef = plate2Ref.child("lastFill");
+        // Settings Ref
+        final DatabaseReference platesCapacity = dbRef.child("settings").child("platesCapacity");
+        DatabaseReference mainContainerCapacity = dbRef.child("settings").child("mainContainerCapacity");
 
         // Get views
         final View mainView = inflater.inflate(R.layout.fragment_weight_monitor, container, false);
         final TextView mainContainerPounds = (TextView) mainView.findViewById(R.id.pounds);
+        final TextView mainContainerPercentaje = (TextView) mainView.findViewById(R.id.main_container_percentaje);
         // Plate 1
         final TextView plate1Pounds = (TextView) mainView.findViewById(R.id.plate_1_pounds);
         final TextView plate1LastFill = (TextView) mainView.findViewById(R.id.plate_1_last_fill);
@@ -50,6 +56,10 @@ public class WeightMonitorFragment extends Fragment {
         final TextView plate2LastFill = (TextView) mainView.findViewById(R.id.plate_2_last_fill);
         final Switch plate2Status = (Switch) mainView.findViewById(R.id.plate_2_status);
 
+        //Set Spinners
+        final DecoView mainContainerChart = (DecoView) mainView.findViewById(R.id.main_container_chart);
+
+// Create background track
         // Set Value event listeners
         // Main Container
         mainContainerPoundsRef.addValueEventListener(new ValueEventListener() {
@@ -71,7 +81,8 @@ public class WeightMonitorFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String text = dataSnapshot.getValue(String.class);
 
-                plate1Pounds.setText(text);
+                updatePounds(text, plate1Pounds, mainContainerPercentaje, mainContainerChart);
+
             }
 
             @Override
@@ -162,5 +173,21 @@ public class WeightMonitorFragment extends Fragment {
         });
 
         return mainView;
+    }
+
+    public void updatePounds(String value, TextView poundsView, TextView percentageView, DecoView containerChart) {
+        poundsView.setText(value);
+
+        containerChart.deleteAll();
+        containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#004ac1"))
+                .setRange(0, 100, parseInt(value))
+                .setLineWidth(32f)
+                .setCapRounded(false)
+                .build()
+        );
+    }
+
+    public String getPercentage(float p, float x) {
+        return String.format("%.2f", (p/100)*x);
     }
 }
