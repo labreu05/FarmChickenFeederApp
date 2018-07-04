@@ -2,6 +2,7 @@ package com.example.labreu.farmchickenfeederapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -15,6 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
+
 public class NavegationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -23,8 +32,37 @@ public class NavegationDrawer extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navegation_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
 
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+
+        final View loadingScreen = findViewById(R.id.loadingScreen);
+
+        DatabaseReference dbRef2 = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference actions = dbRef.child("actions");
+
+        actions.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Map<String, String> data = (Map<String, String>) dataSnapshot.getValue();
+
+                Boolean isRefillingPlate1 = getBoolean(data.get("refillPlate1"));
+                Boolean isRefillingPlate2 = getBoolean(data.get("refillPlate2"));
+
+                if (isRefillingPlate1 || isRefillingPlate2) {
+                    loadingScreen.setVisibility(View.VISIBLE);
+                } else {
+                    loadingScreen.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -90,5 +128,13 @@ public class NavegationDrawer extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public Boolean getBoolean(String value) {
+        if (value.indexOf("true") != -1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -4,9 +4,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,29 +21,30 @@ import com.google.firebase.database.ValueEventListener;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
 
+import java.util.Map;
+
 import static java.lang.Integer.parseInt;
 
 public class WeightMonitorFragment extends Fragment {
+
+    Integer mMainContainerCapacity = 0;
+    Integer mPlatesCapacity = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Get Firebase References
+
         // Main Container References
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mainContainerPoundsRef = dbRef.child("mainContainer").child("pounds");
+        DatabaseReference mainContainerRef = dbRef.child("mainContainer");
+
         // Plate 1 References
         DatabaseReference plate1Ref = dbRef.child("plates").child("plate1");
-        DatabaseReference plate1PoundsRef = plate1Ref.child("pounds");
+        final DatabaseReference plate1RefillActionRef = dbRef.child("actions").child("refillPlate1");
         final DatabaseReference plate1StatusRef = plate1Ref.child("isActive");
-        DatabaseReference plate1LastFillRef = plate1Ref.child("lastFill");
         // Plate 2 References
         DatabaseReference plate2Ref = dbRef.child("plates").child("plate2");
-        DatabaseReference plate2PoundsRef = plate2Ref.child("pounds");
+        final DatabaseReference plate2RefillActionRef = dbRef.child("actions").child("refillPlate2");
         final DatabaseReference plate2StatusRef = plate2Ref.child("isActive");
-        DatabaseReference plate2LastFillRef = plate2Ref.child("lastFill");
-        // Settings Ref
-        final DatabaseReference platesCapacity = dbRef.child("settings").child("platesCapacity");
-        DatabaseReference mainContainerCapacity = dbRef.child("settings").child("mainContainerCapacity");
 
         // Get views
         final View mainView = inflater.inflate(R.layout.fragment_weight_monitor, container, false);
@@ -52,26 +55,30 @@ public class WeightMonitorFragment extends Fragment {
         final TextView plate1LastFill = (TextView) mainView.findViewById(R.id.plate_1_last_fill);
         final Switch plate1Status = (Switch) mainView.findViewById(R.id.plate_1_status);
         final TextView plate1Percentage = (TextView) mainView.findViewById(R.id.plate_1_percentage);
+        final Button plate1RefillButton = (Button) mainView.findViewById(R.id.refill_plate_1);
         // Plate 2
         final TextView plate2Pounds = (TextView) mainView.findViewById(R.id.plate_2_pounds);
         final TextView plate2LastFill = (TextView) mainView.findViewById(R.id.plate_2_last_fill);
         final Switch plate2Status = (Switch) mainView.findViewById(R.id.plate_2_status);
         final TextView plate2Percentage = (TextView) mainView.findViewById(R.id.plate_2_percentage);
+        final Button plate2RefillButton = (Button) mainView.findViewById(R.id.refill_plate_2);
 
         //Get Spinners
         final DecoView mainContainerChart = (DecoView) mainView.findViewById(R.id.main_container_chart);
         final DecoView plate1Chart = (DecoView) mainView.findViewById(R.id.plate_1_chart);
         final DecoView plate2Chart = (DecoView) mainView.findViewById(R.id.plate_2_chart);
 
-// Create background track
         // Set Value event listeners
+
         // Main Container
-        mainContainerPoundsRef.addValueEventListener(new ValueEventListener() {
+        mainContainerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue(String.class);
+                Map<String, String> data = (Map<String, String>) dataSnapshot.getValue();
+                Integer capacity = Integer.parseInt(data.get("capacity"));
+                Float weight = Float.parseFloat(data.get("pounds"));
 
-                updatePounds(text, mainContainerPounds, mainContainerPercentage, mainContainerChart);
+                updatePounds(weight, mainContainerPounds, mainContainerPercentage, mainContainerChart, capacity);
             }
 
             @Override
@@ -80,39 +87,22 @@ public class WeightMonitorFragment extends Fragment {
             }
         });
         // Plate 1
-        plate1PoundsRef.addValueEventListener(new ValueEventListener() {
+        plate1Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue(String.class);
+                Map<String, String> data = (Map<String, String>) dataSnapshot.getValue();
+                Boolean status = getBoolean(data.get("isActive"));
+                Boolean isRefilling = getBoolean(data.get("isRefilling"));
+                Integer capacity = Integer.parseInt(data.get("capacity"));
+                Float weight = Float.parseFloat(data.get("pounds"));
+                String lastFill = data.get("lastFill");
 
-                updatePounds(text, plate1Pounds, plate1Percentage, plate1Chart);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        plate1StatusRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean status = dataSnapshot.getValue(Boolean.class);
 
                 plate1Status.setChecked(status);
-            }
+                plate1LastFill.setText(lastFill);
+                updatePounds(weight, plate1Pounds, plate1Percentage, plate1Chart, capacity);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-        plate1LastFillRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue(String.class);
-
-                plate1LastFill.setText(text);
             }
 
             @Override
@@ -121,38 +111,21 @@ public class WeightMonitorFragment extends Fragment {
             }
         });
         // Plate 2
-        plate2PoundsRef.addValueEventListener(new ValueEventListener() {
+        plate2Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue(String.class);
+                Map<String, String> data = (Map<String, String>) dataSnapshot.getValue();
+                System.out.println(data);
+                Boolean status = getBoolean(data.get("isActive"));
+                Integer capacity = Integer.parseInt(data.get("capacity"));
+                Float weight = Float.parseFloat(data.get("pounds"));
+                String lastFill = data.get("lastFill");
 
-                updatePounds(text, plate2Pounds, plate2Percentage, plate2Chart);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        plate2StatusRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Boolean status = dataSnapshot.getValue(Boolean.class);
 
                 plate2Status.setChecked(status);
-            }
+                plate2LastFill.setText(lastFill);
+                updatePounds(weight, plate2Pounds, plate2Percentage, plate2Chart, capacity);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        plate2LastFillRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String text = dataSnapshot.getValue(String.class);
-
-                plate2LastFill.setText(text);
             }
 
             @Override
@@ -165,27 +138,40 @@ public class WeightMonitorFragment extends Fragment {
         plate1Status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                plate1StatusRef.setValue(isChecked);
+                plate1StatusRef.setValue(Boolean.toString(isChecked));
+            }
+        });
+        plate1RefillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                plate1RefillActionRef.setValue("true");
             }
         });
         // Plate 2
         plate2Status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                plate2StatusRef.setValue(isChecked);
+                plate2StatusRef.setValue(Boolean.toString(isChecked));
+            }
+        });
+        plate2RefillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                plate2RefillActionRef.setValue("true");
             }
         });
 
         return mainView;
     }
 
-    public void updatePounds(String value, TextView poundsView, TextView percentageView, DecoView containerChart) {
-        poundsView.setText(value);
-        percentageView.setText(value + "%");
+    public void updatePounds(Float value, TextView poundsView, TextView percentageView, DecoView containerChart, Integer capacity) {
+        String percentage = getPercentage(value, capacity);
+        poundsView.setText(Float.toString(value));
+        percentageView.setText(percentage + "%");
 
         containerChart.deleteAll();
         containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#004ac1"))
-                .setRange(0, 100, parseInt(value))
+                .setRange(0, 100, (value))
                 .setLineWidth(32f)
                 .setCapRounded(false)
                 .build()
@@ -193,6 +179,14 @@ public class WeightMonitorFragment extends Fragment {
     }
 
     public String getPercentage(float p, float x) {
-        return String.format("%.2f", (p/100)*x);
+        return String.format("%.0f", (p/x)*100);
+    }
+
+    public Boolean getBoolean(String value) {
+        if (value.indexOf("true") != -1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

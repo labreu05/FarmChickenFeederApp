@@ -5,6 +5,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 
 public class SettingsFragment extends Fragment {
@@ -12,6 +18,13 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        // Settings References
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mainContainerCapacityRef = dbRef.child("settings").child("mainContainerCapacity");
+        DatabaseReference platesCapacityRef = dbRef.child("settings").child("platesCapacity");
+
+        View mainView = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        return mainView;
     }
 }
