@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/label_back_dark"
+        android:visibility="invisible"
         android:clickable="true">
 
         <RelativeLayout
@@ -42,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Refilling. Please wait..."
+                    android:text="Executing. Please wait..."
                     android:textColor="#ffffff"
                     android:textSize="25sp"
                     android:textStyle="bold" />

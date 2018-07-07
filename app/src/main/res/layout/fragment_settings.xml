@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:id="@+id/settings_main_container"
+    android:focusableInTouchMode="true"
     tools:context=".SettingsFragment">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,6 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
             <TextView
@@ -30,49 +35,62 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="right">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:gravity="end"
                     android:text="Main Container"
                     android:textAlignment="center"
                     android:textColor="#111111"
                     android:textSize="17sp"
                     android:textStyle="bold" />
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content">
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/main_container_capacity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:numeric="decimal"
-                        android:text="50.0" />
+                        android:layout_gravity="end"
+                        android:width="20dp"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:maxWidth="60dp"
+                        android:minWidth="60dp"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textAlignment="textEnd" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_marginLeft="8dp"
                         android:text="Pounds"
                         android:textColor="#111111"
                         android:textSize="17sp" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:text="Plates"
                     android:textAlignment="center"
                     android:textColor="#111111"
@@ -80,22 +98,29 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2">
+                    android:layout_weight="1">
 
                     <EditText
+                        android:id="@+id/plates_capacity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:numeric="decimal"
-                        android:text="2.0" />
+                        android:layout_gravity="end"
+                        android:focusableInTouchMode="true"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:maxWidth="60dp"
+                        android:minWidth="60dp"
+                        android:text="0"
+                        android:textAlignment="textEnd" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_marginLeft="8dp"
                         android:text="Pounds"
                         android:textColor="#111111"
                         android:textSize="17sp" />
@@ -125,16 +150,18 @@
                 android:textStyle="bold"/>
 
             <Button
-                android:layout_gravity="center"
+                android:id="@+id/calibrateButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@color/colorPrimary"
+                android:focusableInTouchMode="false"
                 android:padding="10dp"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
                 android:text="Calibrate"
-                android:textAllCaps="true"/>
+                android:textAllCaps="true"
+                android:textColor="#ffffff"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

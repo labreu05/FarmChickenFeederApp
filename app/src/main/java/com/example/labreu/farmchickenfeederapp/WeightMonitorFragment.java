@@ -92,7 +92,6 @@ public class WeightMonitorFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Map<String, String> data = (Map<String, String>) dataSnapshot.getValue();
                 Boolean status = getBoolean(data.get("isActive"));
-                Boolean isRefilling = getBoolean(data.get("isRefilling"));
                 Integer capacity = Integer.parseInt(data.get("capacity"));
                 Float weight = Float.parseFloat(data.get("pounds"));
                 String lastFill = data.get("lastFill");

@@ -49,8 +49,9 @@ public class NavegationDrawer extends AppCompatActivity
 
                 Boolean isRefillingPlate1 = getBoolean(data.get("refillPlate1"));
                 Boolean isRefillingPlate2 = getBoolean(data.get("refillPlate2"));
+                Boolean isCalibrating = getBoolean(data.get("calibrate"));
 
-                if (isRefillingPlate1 || isRefillingPlate2) {
+                if (isRefillingPlate1 || isRefillingPlate2 || isCalibrating) {
                     loadingScreen.setVisibility(View.VISIBLE);
                 } else {
                     loadingScreen.setVisibility(View.INVISIBLE);
