@@ -56,9 +56,12 @@
                             android:text="Start Date"/>
 
                         <EditText
+                            android:id="@+id/start_date"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="20/05/2018 05:00 PM"/>
+                            android:text="20/05/2018"/>
 
                     </LinearLayout>
                     <LinearLayout
@@ -78,9 +81,12 @@
                             android:text="End Date"/>
 
                         <EditText
+                            android:id="@+id/end_date"
+                            android:focusableInTouchMode="false"
+                            android:focusable="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="20/05/2018 05:00 PM"/>
+                            android:text="20/05/2018"/>
 
                     </LinearLayout>
                 </LinearLayout>
