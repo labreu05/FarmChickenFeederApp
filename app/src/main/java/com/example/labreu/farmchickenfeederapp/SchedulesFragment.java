@@ -22,14 +22,15 @@ public class SchedulesFragment extends Fragment {
         RecyclerView schedulesView = mainView.findViewById(R.id.schedules_recycler_view);
         schedulesView.setLayoutManager(new LinearLayoutManager(mainView.getContext()));
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference schedulesRef = dbRef.child("schedules").getRef();
+        final DatabaseReference schedulesRef = dbRef.child("schedules").getRef();
 
-        FirebaseRecyclerAdapter<Schedule, SchedulesHolder> scheduleAdapter = new FirebaseRecyclerAdapter<Schedule, SchedulesHolder>(Schedule.class, R.layout.schedule, SchedulesHolder.class, schedulesRef) {
+        final FirebaseRecyclerAdapter<Schedule, SchedulesHolder> scheduleAdapter = new FirebaseRecyclerAdapter<Schedule, SchedulesHolder>(Schedule.class, R.layout.schedule, SchedulesHolder.class, schedulesRef) {
             @Override
             protected void populateViewHolder(SchedulesHolder viewHolder, Schedule model, int position) {
                 viewHolder.setDate(model.getDate());
                 viewHolder.setTime(model.getTime());
                 viewHolder.setIsRecurrent(model.getIsRecurrent());
+                viewHolder.setDeleteOption(getRef(position));
             }
         };
 

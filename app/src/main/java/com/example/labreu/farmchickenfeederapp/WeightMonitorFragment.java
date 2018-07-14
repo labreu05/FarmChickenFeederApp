@@ -18,17 +18,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-//import com.hookedonplay.decoviewlib.DecoView;
-//import com.hookedonplay.decoviewlib.charts.SeriesItem;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
 
 import java.util.Map;
 
 import static java.lang.Integer.parseInt;
 
 public class WeightMonitorFragment extends Fragment {
-
-    Integer mMainContainerCapacity = 0;
-    Integer mPlatesCapacity = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,9 +61,9 @@ public class WeightMonitorFragment extends Fragment {
         final Button plate2RefillButton = (Button) mainView.findViewById(R.id.refill_plate_2);
 
         //Get Spinners
-//        final DecoView mainContainerChart = (DecoView) mainView.findViewById(R.id.main_container_chart);
-//        final DecoView plate1Chart = (DecoView) mainView.findViewById(R.id.plate_1_chart);
-//        final DecoView plate2Chart = (DecoView) mainView.findViewById(R.id.plate_2_chart);
+        final DecoView mainContainerChart = (DecoView) mainView.findViewById(R.id.main_container_chart);
+        final DecoView plate1Chart = (DecoView) mainView.findViewById(R.id.plate_1_chart);
+        final DecoView plate2Chart = (DecoView) mainView.findViewById(R.id.plate_2_chart);
 
         // Set Value event listeners
 
@@ -78,7 +75,7 @@ public class WeightMonitorFragment extends Fragment {
                 Integer capacity = Integer.parseInt(data.get("capacity"));
                 Float weight = Float.parseFloat(data.get("pounds"));
 
-//                updatePounds(weight, mainContainerPounds, mainContainerPercentage, mainContainerChart, capacity);
+                updatePounds(weight, mainContainerPounds, mainContainerPercentage, mainContainerChart, capacity);
             }
 
             @Override
@@ -96,12 +93,9 @@ public class WeightMonitorFragment extends Fragment {
                 Float weight = Float.parseFloat(data.get("pounds"));
                 String lastFill = data.get("lastFill");
 
-
                 plate1Status.setChecked(status);
                 plate1LastFill.setText(lastFill);
-//                updatePounds(weight, plate1Pounds, plate1Percentage, plate1Chart, capacity);
-
-
+                updatePounds(weight, plate1Pounds, plate1Percentage, plate1Chart, capacity);
             }
 
             @Override
@@ -119,12 +113,10 @@ public class WeightMonitorFragment extends Fragment {
                 Integer capacity = Integer.parseInt(data.get("capacity"));
                 Float weight = Float.parseFloat(data.get("pounds"));
                 String lastFill = data.get("lastFill");
-
-
+                
                 plate2Status.setChecked(status);
                 plate2LastFill.setText(lastFill);
-//                updatePounds(weight, plate2Pounds, plate2Percentage, plate2Chart, capacity);
-
+                updatePounds(weight, plate2Pounds, plate2Percentage, plate2Chart, capacity);
             }
 
             @Override
@@ -163,19 +155,19 @@ public class WeightMonitorFragment extends Fragment {
         return mainView;
     }
 
-//    public void updatePounds(Float value, TextView poundsView, TextView percentageView, DecoView containerChart, Integer capacity) {
-//        String percentage = getPercentage(value, capacity);
-//        poundsView.setText(Float.toString(value));
-//        percentageView.setText(percentage + "%");
-//
-//        containerChart.deleteAll();
-//        containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#004ac1"))
-//                .setRange(0, 100, (value))
-//                .setLineWidth(32f)
-//                .setCapRounded(false)
-//                .build()
-//        );
-//    }
+    public void updatePounds(Float value, TextView poundsView, TextView percentageView, DecoView containerChart, Integer capacity) {
+        String percentage = getPercentage(value, capacity);
+        poundsView.setText(Float.toString(value));
+        percentageView.setText(percentage + "%");
+
+        containerChart.deleteAll();
+        containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#004ac1"))
+                .setRange(0, 100, (value))
+                .setLineWidth(32f)
+                .setCapRounded(false)
+                .build()
+        );
+    }
 
     public String getPercentage(float p, float x) {
         return String.format("%.0f", (p/x)*100);
