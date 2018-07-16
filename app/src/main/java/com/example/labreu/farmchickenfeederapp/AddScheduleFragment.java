@@ -45,7 +45,7 @@ public class AddScheduleFragment extends Fragment {
                 String time = newScheduleTime.getText().toString();
                 Boolean isRecurrent = newScheduleIsRecurrent.isChecked();
 
-                if (date.isEmpty() && time.isEmpty()) {
+                if (!date.isEmpty() && !time.isEmpty()) {
                     Schedule newSchedule = new Schedule(date, time, isRecurrent);
 
                     schedulesRef.push().setValue(newSchedule);
