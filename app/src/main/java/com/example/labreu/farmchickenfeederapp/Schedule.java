@@ -1,7 +1,7 @@
 package com.example.labreu.farmchickenfeederapp;
 
 public class Schedule {
-    private String isRecurrent;
+    private Boolean isRecurrent;
     private String date;
     private String time;
 
@@ -9,7 +9,7 @@ public class Schedule {
 
     }
 
-    public Schedule (String date, String time, String isRecurrent) {
+    public Schedule (String date, String time, Boolean isRecurrent) {
         this.time = time;
         this.date = date;
         this.isRecurrent = isRecurrent;
@@ -19,7 +19,7 @@ public class Schedule {
         return time;
     }
 
-    public String getIsRecurrent() {
+    public Boolean getIsRecurrent() {
         return isRecurrent;
     }
 

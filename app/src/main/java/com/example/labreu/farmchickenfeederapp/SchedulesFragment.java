@@ -2,9 +2,12 @@ package com.example.labreu.farmchickenfeederapp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +21,14 @@ public class SchedulesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mainView = inflater.inflate(R.layout.fragment_schedules, container, false);
-
         RecyclerView schedulesView = mainView.findViewById(R.id.schedules_recycler_view);
+        FloatingActionButton addScheduleButton = mainView.findViewById(R.id.add_schedule_button);
+
         schedulesView.setLayoutManager(new LinearLayoutManager(mainView.getContext()));
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference schedulesRef = dbRef.child("schedules").getRef();
+
+        final FragmentManager fragmentManager = getFragmentManager();
 
         final FirebaseRecyclerAdapter<Schedule, SchedulesHolder> scheduleAdapter = new FirebaseRecyclerAdapter<Schedule, SchedulesHolder>(Schedule.class, R.layout.schedule, SchedulesHolder.class, schedulesRef) {
             @Override
@@ -35,6 +41,16 @@ public class SchedulesFragment extends Fragment {
         };
 
         schedulesView.setAdapter(scheduleAdapter);
+
+        addScheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
+                setSupportActionBar(toolbar);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                fragmentManager.beginTransaction().replace(R.id.main_container, new AddScheduleFragment()).commit();
+            }
+        });
 
         return mainView;
     }

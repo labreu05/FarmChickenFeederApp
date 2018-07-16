@@ -14,7 +14,7 @@ public class SchedulesHolder extends RecyclerView.ViewHolder {
 
     private final TextView date;
     private final TextView time;
-    private final TextView isRecurrent;
+    private final CheckBox isRecurrent;
     private final ImageView scheduleDeleteOption;
 
     public SchedulesHolder(View itemView) {
@@ -34,9 +34,10 @@ public class SchedulesHolder extends RecyclerView.ViewHolder {
         time.setText(text);
     }
 
-    public void setIsRecurrent(String text) {
-        isRecurrent.setSelected(Boolean.getBoolean(text));
+    public void setIsRecurrent(Boolean isSelected) {
+        isRecurrent.setChecked(isSelected);
     }
+
     public void setDeleteOption(final DatabaseReference childRef) {
         scheduleDeleteOption.setOnClickListener(new View.OnClickListener() {
             @Override

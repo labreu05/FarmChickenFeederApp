@@ -23,7 +23,6 @@ public class ReportsFragment extends Fragment {
 
         final EditText startDate = mainView.findViewById(R.id.start_date);
         final EditText endDate = mainView.findViewById(R.id.end_date);
-        Date date = new Date();
         final Calendar calendar = Calendar.getInstance();
 
         startDate.setOnClickListener(new View.OnClickListener() {
