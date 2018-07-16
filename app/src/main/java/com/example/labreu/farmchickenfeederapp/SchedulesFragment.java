@@ -45,9 +45,6 @@ public class SchedulesFragment extends Fragment {
         addScheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
-                setSupportActionBar(toolbar);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 fragmentManager.beginTransaction().replace(R.id.main_container, new AddScheduleFragment()).commit();
             }
         });

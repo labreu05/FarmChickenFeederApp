@@ -1,5 +1,6 @@
 package com.example.labreu.farmchickenfeederapp;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,9 +33,9 @@ public class AddScheduleFragment extends Fragment {
         final EditText newScheduleTime = mainView.findViewById(R.id.new_schedule_time);
         final CheckBox newScheduleIsRecurrent = mainView.findViewById(R.id.new_schedule_is_recurrent);
 
+
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference schedulesRef = dbRef.child("schedules").getRef();
-
         final FragmentManager fragmentManager = getFragmentManager();
 
         addNewScheduleButton.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +45,7 @@ public class AddScheduleFragment extends Fragment {
                 String time = newScheduleTime.getText().toString();
                 Boolean isRecurrent = newScheduleIsRecurrent.isChecked();
 
-                if (date != "" && time != "") {
+                if (date.isEmpty() && time.isEmpty()) {
                     Schedule newSchedule = new Schedule(date, time, isRecurrent);
 
                     schedulesRef.push().setValue(newSchedule);

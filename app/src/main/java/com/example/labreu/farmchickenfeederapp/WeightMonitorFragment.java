@@ -161,7 +161,7 @@ public class WeightMonitorFragment extends Fragment {
         percentageView.setText(percentage + "%");
 
         containerChart.deleteAll();
-        containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#004ac1"))
+        containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#EE1C00"))
                 .setRange(0, 100, (value))
                 .setLineWidth(32f)
                 .setCapRounded(false)

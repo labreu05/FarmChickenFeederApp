@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="65" />
+                                                <entry key="scalingPercent" value="99" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -48,9 +48,9 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="ffffff" />
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundImage" value="$USER_HOME$/Desktop/weight.png" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/chicken-logo.png" />
                                       <entry key="foregroundLayerName" value="ic_launcher_foreground" />
-                                      <entry key="outputName" value="weight_image" />
+                                      <entry key="outputName" value="app_logo" />
                                       <entry key="previewDensity" value="XXXHIGH" />
                                       <entry key="webIconShape" value="CIRCLE" />
                                     </map>
