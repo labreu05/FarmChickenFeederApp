@@ -269,7 +269,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="Arial"
                         android:paddingBottom="10dp"
-                        android:text="Plate #1"
+                        android:text="Plate #2"
                         android:textAlignment="center"
                         android:textSize="20sp"
                         android:textStyle="bold" />

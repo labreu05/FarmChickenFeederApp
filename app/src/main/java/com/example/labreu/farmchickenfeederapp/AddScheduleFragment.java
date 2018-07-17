@@ -29,6 +29,7 @@ public class AddScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View mainView =  inflater.inflate(R.layout.fragment_add_schedule, container, false);
         Button addNewScheduleButton = mainView.findViewById(R.id.add_new_schedule_button);
+        Button cancelNewScheduleButton = mainView.findViewById(R.id.cancel_new_schedule_button);
         final EditText newScheduleDate = mainView.findViewById(R.id.new_schedule_date);
         final EditText newScheduleTime = mainView.findViewById(R.id.new_schedule_time);
         final CheckBox newScheduleIsRecurrent = mainView.findViewById(R.id.new_schedule_is_recurrent);
@@ -91,6 +92,14 @@ public class AddScheduleFragment extends Fragment {
                 timePicker.show();
             }
         });
+
+        cancelNewScheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fragmentManager.beginTransaction().replace(R.id.main_container, new SchedulesFragment()).commit();
+            }
+        });
+
 
         return mainView;
     }
