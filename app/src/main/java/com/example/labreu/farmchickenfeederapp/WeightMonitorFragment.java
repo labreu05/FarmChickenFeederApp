@@ -157,12 +157,21 @@ public class WeightMonitorFragment extends Fragment {
 
     public void updatePounds(Float value, TextView poundsView, TextView percentageView, DecoView containerChart, Integer capacity) {
         String percentage = getPercentage(value, capacity);
+        int piePercentage = Integer.parseInt(percentage);
+        if (piePercentage > 100) {
+            piePercentage = 100;
+        }
+
+        if (piePercentage < 0) {
+            piePercentage = 0;
+        }
+
         poundsView.setText(Float.toString(value));
         percentageView.setText(percentage + "%");
 
         containerChart.deleteAll();
         containerChart.addSeries(new SeriesItem.Builder(Color.parseColor("#EE1C00"))
-                .setRange(0, 100, (value))
+                .setRange(0, 100, piePercentage)
                 .setLineWidth(32f)
                 .setCapRounded(false)
                 .build()
@@ -170,7 +179,13 @@ public class WeightMonitorFragment extends Fragment {
     }
 
     public String getPercentage(float p, float x) {
-        return String.format("%.0f", (p/x)*100);
+        if (p > 100) {
+            return "100";
+        } else if (p < 0) {
+            return "0";
+        } else {
+            return String.format("%.0f", (p / x) * 100);
+        }
     }
 
     public Boolean getBoolean(String value) {

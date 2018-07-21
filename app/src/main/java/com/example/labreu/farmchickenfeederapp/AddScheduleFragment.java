@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class AddScheduleFragment extends Fragment {
@@ -71,7 +72,20 @@ public class AddScheduleFragment extends Fragment {
                 DatePickerDialog datePicker = new DatePickerDialog(mainView.getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        newScheduleDate.setText(day+"-"+(month+1)+"-"+year);
+                        String newMonth = "" + month;
+                        String newDay = "" + day;
+
+                        if(month + 1 < 10){
+
+                            newMonth = "0" + month;
+                        }
+
+                        if(day < 10){
+
+                            newDay  = "0" + day ;
+                        }
+
+                        newScheduleDate.setText(newDay + "-" + newMonth + "-" + year);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)-1, calendar.get(Calendar.DAY_OF_MONTH));
 
@@ -85,9 +99,9 @@ public class AddScheduleFragment extends Fragment {
                 TimePickerDialog timePicker = new TimePickerDialog(mainView.getContext(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                        newScheduleTime.setText(hour + ":" + minute);
+                        newScheduleTime.setText(getHour(hour, minute));
                     }
-                }, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), true);
+                }, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), false);
 
                 timePicker.show();
             }
@@ -104,11 +118,87 @@ public class AddScheduleFragment extends Fragment {
         return mainView;
     }
 
-    public Boolean getBoolean(String value) {
+    public Boolean getHour(String value) {
         if (value.indexOf("true") != -1) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public String getHour(int hour, int minute) {
+        int newHour = hour;
+        String stringHour = "";
+        String newMinute = "" + minute;
+        String amOrPm = "pm";
+
+        if (hour<12) {
+            amOrPm = "am";
+        }
+
+        switch (hour) {
+            case 0: {
+                newHour = 12;
+                break;
+            }
+            case 13: {
+                newHour = 1;
+                break;
+            }
+            case 14: {
+                newHour = 2;
+                break;
+            }
+            case 15: {
+                newHour = 3;
+                break;
+            }
+            case 16: {
+                newHour = 4;
+                break;
+            }
+            case 17: {
+                newHour = 5;
+                break;
+            }
+            case 18: {
+                newHour = 6;
+                break;
+            }
+            case 19: {
+                newHour = 7;
+                break;
+            }
+            case 20: {
+                newHour = 8;
+                break;
+            }
+            case 21: {
+                newHour = 9;
+                break;
+            }
+            case 22: {
+                newHour = 10;
+                break;
+            }
+            case 23: {
+                newHour = 11;
+                break;
+            }
+        }
+
+        stringHour = "" + newHour;
+
+        if(newHour  < 10){
+
+            stringHour = "0" + newHour;
+        }
+
+        if(minute < 10){
+
+            newMinute  = "0" + minute ;
+        }
+
+        return stringHour + ":" + newMinute + " " + amOrPm;
     }
 }

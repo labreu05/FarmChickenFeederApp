@@ -76,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
-                        android:text="Pounds"
+                        android:text="Grams"
                         android:textColor="#111111"
                         android:textSize="17sp" />
                 </LinearLayout>
@@ -121,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
-                        android:text="Pounds"
+                        android:text="Grams"
                         android:textColor="#111111"
                         android:textSize="17sp" />
                 </LinearLayout>
