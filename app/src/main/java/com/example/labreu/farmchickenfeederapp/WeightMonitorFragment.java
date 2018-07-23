@@ -1,9 +1,12 @@
 package com.example.labreu.farmchickenfeederapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,6 +98,15 @@ public class WeightMonitorFragment extends Fragment {
 
                 plate1Status.setChecked(status);
                 plate1LastFill.setText(lastFill);
+
+                if (status == true) {
+                    plate1RefillButton.setEnabled(true);
+                    plate1RefillButton.setBackgroundColor(Color.parseColor("#FF7A00"));
+                } else {
+                    plate1RefillButton.setEnabled(false);
+                    plate1RefillButton.setBackgroundColor(Color.parseColor("#cccccc"));
+                }
+
                 updatePounds(weight, plate1Pounds, plate1Percentage, plate1Chart, capacity);
             }
 
@@ -116,6 +128,17 @@ public class WeightMonitorFragment extends Fragment {
                 
                 plate2Status.setChecked(status);
                 plate2LastFill.setText(lastFill);
+
+
+                if (status == true) {
+                    plate2RefillButton.setEnabled(true);
+                    plate2RefillButton.setBackgroundColor(Color.parseColor("#FF7A00"));
+                } else {
+                    plate2RefillButton.setEnabled(false);
+                    plate2RefillButton.setBackgroundColor(Color.parseColor("#cccccc"));
+                }
+
+
                 updatePounds(weight, plate2Pounds, plate2Percentage, plate2Chart, capacity);
             }
 
@@ -126,29 +149,101 @@ public class WeightMonitorFragment extends Fragment {
         });
         // Set Value Change Listener
         // Plate 1
-        plate1Status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        plate1Status.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                plate1StatusRef.setValue(Boolean.toString(isChecked));
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final Boolean isChecked = plate1Status.isChecked();
+
+                builder.setMessage("Do you want to change this plate status?")
+                        .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                plate1Status.setChecked(isChecked);
+                                plate1StatusRef.setValue(Boolean.toString(isChecked));
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int id) {
+                                plate1Status.setChecked(!isChecked);
+                                plate1StatusRef.setValue(Boolean.toString(!isChecked));
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
         plate1RefillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                plate1RefillActionRef.setValue("true");
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                builder.setMessage("Do you want Refill this plate?")
+                        .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                plate1RefillActionRef.setValue("true");
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
         // Plate 2
-        plate2Status.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        plate2Status.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                plate2StatusRef.setValue(Boolean.toString(isChecked));
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                final Boolean isChecked = plate2Status.isChecked();
+
+                builder.setMessage("Do you want to change this plate status?")
+                        .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                plate2Status.setChecked(isChecked);
+                                plate2StatusRef.setValue(Boolean.toString(isChecked));
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int id) {
+                                plate2Status.setChecked(!isChecked);
+                                plate2StatusRef.setValue(Boolean.toString(!isChecked));
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
         plate2RefillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                plate2RefillActionRef.setValue("true");
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                builder.setMessage("Do you want Refill this plate?")
+                        .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                plate2RefillActionRef.setValue("true");
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 

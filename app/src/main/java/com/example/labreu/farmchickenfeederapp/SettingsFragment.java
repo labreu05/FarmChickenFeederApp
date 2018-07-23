@@ -1,6 +1,8 @@
 package com.example.labreu.farmchickenfeederapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -122,7 +124,23 @@ public class SettingsFragment extends Fragment {
         calibrateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calibrateActionRef.setValue("true");
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                builder.setMessage("Do you want calibrate the system?")
+                        .setPositiveButton("Yes",  new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                calibrateActionRef.setValue("true");
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
             }
         });
 

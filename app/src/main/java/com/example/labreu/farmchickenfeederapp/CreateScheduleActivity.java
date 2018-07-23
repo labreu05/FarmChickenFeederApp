@@ -2,12 +2,12 @@ package com.example.labreu.farmchickenfeederapp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -21,22 +21,21 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
+public class CreateScheduleActivity extends AppCompatActivity {
 
-public class AddScheduleFragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View mainView =  inflater.inflate(R.layout.fragment_add_schedule, container, false);
-        Button addNewScheduleButton = mainView.findViewById(R.id.add_new_schedule_button);
-        Button cancelNewScheduleButton = mainView.findViewById(R.id.cancel_new_schedule_button);
-        final EditText newScheduleDate = mainView.findViewById(R.id.new_schedule_date);
-        final EditText newScheduleTime = mainView.findViewById(R.id.new_schedule_time);
-        final CheckBox newScheduleIsRecurrent = mainView.findViewById(R.id.new_schedule_is_recurrent);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_schedule);
 
+        Button addNewScheduleButton = this.findViewById(R.id.add_new_schedule_button);
+        Button cancelNewScheduleButton = this.findViewById(R.id.cancel_new_schedule_button);
+        final EditText newScheduleDate = this.findViewById(R.id.new_schedule_date);
+        final EditText newScheduleTime = this.findViewById(R.id.new_schedule_time);
+        final CheckBox newScheduleIsRecurrent = this.findViewById(R.id.new_schedule_is_recurrent);
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
         final DatabaseReference schedulesRef = dbRef.child("schedules").getRef();
-        final FragmentManager fragmentManager = getFragmentManager();
 
         newScheduleIsRecurrent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -63,12 +62,12 @@ public class AddScheduleFragment extends Fragment {
 
                     schedulesRef.push().setValue(newSchedule);
 
-                    Toast.makeText(getActivity(), "Schedule Successfully saved",
+                    Toast.makeText(getBaseContext(), "Schedule Successfully saved",
                             Toast.LENGTH_SHORT).show();
 
-                    fragmentManager.beginTransaction().replace(R.id.main_container, new SchedulesFragment()).commit();
+                finish();
                 } else {
-                    Toast.makeText(getActivity(), "Please Fill all the fields.",
+                    Toast.makeText(getBaseContext(), "Please Fill all the fields.",
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -80,7 +79,7 @@ public class AddScheduleFragment extends Fragment {
         newScheduleDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePicker = new DatePickerDialog(mainView.getContext(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePicker = new DatePickerDialog(CreateScheduleActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         String newMonth = "" + month;
@@ -107,7 +106,7 @@ public class AddScheduleFragment extends Fragment {
         newScheduleTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog timePicker = new TimePickerDialog(mainView.getContext(), new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePicker = new TimePickerDialog(CreateScheduleActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                         newScheduleTime.setText(getHour(hour, minute));
@@ -117,16 +116,11 @@ public class AddScheduleFragment extends Fragment {
                 timePicker.show();
             }
         });
+    }
 
-        cancelNewScheduleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragmentManager.beginTransaction().replace(R.id.main_container, new SchedulesFragment()).commit();
-            }
-        });
-
-
-        return mainView;
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     public Boolean getHour(String value) {

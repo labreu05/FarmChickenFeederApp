@@ -1,10 +1,12 @@
 package com.example.labreu.farmchickenfeederapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -45,7 +47,13 @@ public class SchedulesFragment extends Fragment {
         addScheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragmentManager.beginTransaction().replace(R.id.main_container, new AddScheduleFragment()).commit();
+//                FragmentTransaction ft = getFragmentManager().beginTransaction();
+//                ft.addToBackStack(this.getClass().getName());
+//                ft.commit();
+//                onPause();
+                Intent intent = new Intent(getContext(), CreateScheduleActivity.class);
+                startActivity(intent);
+//                fragmentManager.beginTransaction().replace(R.id.main_container, new AddScheduleFragment()).commit();
             }
         });
 
