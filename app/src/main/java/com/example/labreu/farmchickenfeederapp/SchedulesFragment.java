@@ -47,13 +47,8 @@ public class SchedulesFragment extends Fragment {
         addScheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                ft.addToBackStack(this.getClass().getName());
-//                ft.commit();
-//                onPause();
-                Intent intent = new Intent(getContext(), CreateScheduleActivity.class);
-                startActivity(intent);
-//                fragmentManager.beginTransaction().replace(R.id.main_container, new AddScheduleFragment()).commit();
+                Intent createScheduleActivity = new Intent(getContext(), CreateScheduleActivity.class);
+                startActivity(createScheduleActivity);
             }
         });
 

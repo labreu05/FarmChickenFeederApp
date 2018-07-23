@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -29,7 +30,6 @@ public class CreateScheduleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_schedule);
 
         Button addNewScheduleButton = this.findViewById(R.id.add_new_schedule_button);
-        Button cancelNewScheduleButton = this.findViewById(R.id.cancel_new_schedule_button);
         final EditText newScheduleDate = this.findViewById(R.id.new_schedule_date);
         final EditText newScheduleTime = this.findViewById(R.id.new_schedule_time);
         final CheckBox newScheduleIsRecurrent = this.findViewById(R.id.new_schedule_is_recurrent);
@@ -119,8 +119,14 @@ public class CreateScheduleActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+            default:
+                return true;
+        }
     }
 
     public Boolean getHour(String value) {
