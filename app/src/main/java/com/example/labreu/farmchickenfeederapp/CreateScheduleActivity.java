@@ -129,14 +129,6 @@ public class CreateScheduleActivity extends AppCompatActivity {
         }
     }
 
-    public Boolean getHour(String value) {
-        if (value.indexOf("true") != -1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public String getHour(int hour, int minute) {
         int newHour = hour;
         String stringHour = "";

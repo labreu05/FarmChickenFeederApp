@@ -20,8 +20,12 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class ReportsFragment extends Fragment {
     @Override
@@ -39,9 +43,29 @@ public class ReportsFragment extends Fragment {
                 DatePickerDialog datePicker = new DatePickerDialog(mainView.getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        startDate.setText(day+"-"+(month+1)+"-"+year);
+                        String newMonth = "" + month;
+                        String newDay = "" + day;
+
+                        if(month + 1 < 10){
+
+                            newMonth = "0" + month;
+                        }
+
+                        if(day < 10){
+
+                            newDay  = "0" + day ;
+                        }
+
+                        String rawStartDate = newDay+"-"+ newMonth+"-"+year;
+                        String rawEndDate = endDate.getText().toString();
+                        System.out.println(rawStartDate);
+                        Long millisStartDate = getFormattedtDate(rawStartDate);
+                        Long millisEndDate = getFormattedtDate(rawEndDate);
+                        startDate.setText(rawStartDate);
+
+                        setDataListener(mainView, millisStartDate, millisEndDate);
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)-1, calendar.get(Calendar.DAY_OF_MONTH));
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
                 datePicker.show();
             }
@@ -53,11 +77,29 @@ public class ReportsFragment extends Fragment {
                 DatePickerDialog datePicker = new DatePickerDialog(mainView.getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        endDate.setText(day+"-"+(month+1)+"-"+year);
+                        String newMonth = "" + month;
+                        String newDay = "" + day;
 
-                        setDataListener(mainView);
+                        if(month + 1 < 10){
+
+                            newMonth = "0" + month;
+                        }
+
+                        if(day < 10){
+
+                            newDay  = "0" + day ;
+                        }
+
+                        String rawEndDate = newDay+"-"+ newMonth+"-"+year;
+                        String rawStartDate = startDate.getText().toString();
+                        System.out.println(rawStartDate);
+                        Long millisStartDate = getFormattedtDate(rawStartDate);
+                        Long millisEndDate = getFormattedtDate(rawEndDate);
+
+                        endDate.setText(rawEndDate);
+                        setDataListener(mainView, millisStartDate, millisEndDate);
                     }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)-1, calendar.get(Calendar.DAY_OF_MONTH));
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
                 datePicker.show();
             }
@@ -68,7 +110,8 @@ public class ReportsFragment extends Fragment {
 
         refillsView.setLayoutManager(new LinearLayoutManager(mainView.getContext()));
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference refillsRef = dbRef.child("refills").getRef();
+        final DatabaseReference refillsRef = dbRef.child("refills").orderByChild("millisDate").getRef();
+
 
         final FirebaseRecyclerAdapter<RefillEntry, RefillEntriesHolder> scheduleAdapter = new FirebaseRecyclerAdapter<RefillEntry, RefillEntriesHolder>(RefillEntry.class, R.layout.refill_entry, RefillEntriesHolder.class, refillsRef) {
             @Override
@@ -85,13 +128,13 @@ public class ReportsFragment extends Fragment {
         return mainView;
     }
 
-    public void setDataListener(View mainView) {
-        System.out.println("SETTED XDXDXDXDXD");
+    public void setDataListener(View mainView, Long startDate, Long endDate) {
         RecyclerView refillsView = mainView.findViewById(R.id.refill_entries_recycler_view);
-
         refillsView.setLayoutManager(new LinearLayoutManager(mainView.getContext()));
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-        final DatabaseReference refillsRef = dbRef.child("refills").getRef();
+        System.out.println("Start Date: "+ startDate);
+        System.out.println("End Date: "+ endDate);
+        final DatabaseReference refillsRef = dbRef.child("refills").orderByChild("millisDate").startAt(startDate).endAt(endDate).getRef();
 
         final FirebaseRecyclerAdapter<RefillEntry, RefillEntriesHolder> scheduleAdapter = new FirebaseRecyclerAdapter<RefillEntry, RefillEntriesHolder>(RefillEntry.class, R.layout.refill_entry, RefillEntriesHolder.class, refillsRef) {
             @Override
@@ -103,5 +146,22 @@ public class ReportsFragment extends Fragment {
         };
 
         refillsView.setAdapter(scheduleAdapter);
+    }
+
+    public long getFormattedtDate(String date)  {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("America/Santo_Domingo"));
+        String rawDate = date + " 00:00:00";
+        Date parsedDate = null;
+
+        try {
+            parsedDate = sdf.parse(rawDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//
+        System.out.println(parsedDate);
+        System.out.println(parsedDate.getTime());
+        return parsedDate.getTime();
     }
 }
