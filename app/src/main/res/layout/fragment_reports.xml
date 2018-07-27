@@ -170,12 +170,12 @@
                 <TextView android:background="#cccccc" android:textStyle="bold" android:text="Weight" android:layout_weight="3"/>
                 <TextView android:background="#cccccc" android:textStyle="bold" android:text="Date" android:layout_weight="4"/>
             </TableRow>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/refill_entries_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.v7.widget.RecyclerView>
         </TableLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/refill_entries_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </FrameLayout>
