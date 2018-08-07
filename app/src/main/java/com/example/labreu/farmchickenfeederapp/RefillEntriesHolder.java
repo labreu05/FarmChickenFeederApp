@@ -12,6 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 
 public class RefillEntriesHolder extends RecyclerView.ViewHolder {
 
+    private final TextView plate;
     private final TextView date;
     private final TextView time;
     private final TextView grams;
@@ -19,9 +20,14 @@ public class RefillEntriesHolder extends RecyclerView.ViewHolder {
     public RefillEntriesHolder(View itemView) {
         super(itemView);
 
+        plate = (TextView) itemView.findViewById(R.id.plate_number);
         date = (TextView) itemView.findViewById(R.id.refill_date);
         time = (TextView) itemView.findViewById(R.id.refill_time);
         grams = (TextView) itemView.findViewById(R.id.refill_grams);
+    }
+
+    public void setPlate(String text) {
+        plate.setText(text);
     }
 
     public void setDate(String text) {
